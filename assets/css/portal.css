@@ -1567,7 +1567,10 @@
       background: #d35400;
     }
 
-    .btn-save-green {
+    .btn-save-green,
+    .btn-create-green,
+    .btn-action-create,
+    .btn-success-green {
       background: var(--btn-save-green);
       color: #ffffff;
       border: none;
@@ -1579,9 +1582,13 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      transition: background-color 0.15s ease, transform 0.1s ease;
     }
 
-    .btn-save-green:hover {
+    .btn-save-green:hover,
+    .btn-create-green:hover,
+    .btn-action-create:hover,
+    .btn-success-green:hover {
       background: #219653;
     }
 
