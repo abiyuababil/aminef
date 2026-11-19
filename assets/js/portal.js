@@ -130,56 +130,24 @@ lucide.createIcons();
     }
 
     // ============================================================
-    // INTERNATIONAL ALLOWANCE: ACCORDION & LAYOUT SWITCHER
+    // INTERNATIONAL ALLOWANCE: CLEAN ACCORDION
     // ============================================================
     function toggleIntlPaymentAccordion() {
       const body = document.getElementById('body-intl-payment');
       const icon = document.getElementById('icon-intl-payment-chevron');
-      const label = document.getElementById('label-intl-accordion');
       if (!body) return;
 
       const isClosed = (body.style.display === 'none');
       if (isClosed) {
         body.style.display = 'block';
         if (icon) icon.classList.add('chevron-rotated');
-        if (label) label.innerText = 'Collapse Table';
       } else {
         body.style.display = 'none';
         if (icon) icon.classList.remove('chevron-rotated');
-        if (label) label.innerText = 'Expand Table';
       }
       lucide.createIcons();
     }
     window.toggleIntlPaymentAccordion = toggleIntlPaymentAccordion;
-
-    function setIntlPaymentLayoutVersion(version) {
-      const card = document.getElementById('card-intl-payment');
-      const slotTop = document.getElementById('slot-intl-payment-top');
-      const slotBottom = document.getElementById('slot-intl-payment-bottom');
-      const btnV1 = document.getElementById('btn-layout-v1');
-      const btnV2 = document.getElementById('btn-layout-v2');
-      const desc = document.getElementById('desc-current-layout');
-      if (!card || !slotTop || !slotBottom) return;
-
-      if (version === 'bottom') {
-        slotBottom.appendChild(card);
-        if (btnV1) btnV1.classList.remove('active');
-        if (btnV2) btnV2.classList.add('active');
-        if (desc) desc.innerText = 'Versi 2: Posisi di Bawah Pre-Departure & Return Allowance';
-      } else {
-        slotTop.appendChild(card);
-        if (btnV1) btnV1.classList.add('active');
-        if (btnV2) btnV2.classList.remove('active');
-        if (desc) desc.innerText = 'Versi 1: Accordion (Bisa Buka - Tutup di Atas)';
-      }
-
-      try {
-        localStorage.setItem('aminef_intl_payment_position', version);
-      } catch (e) { }
-
-      lucide.createIcons();
-    }
-    window.setIntlPaymentLayoutVersion = setIntlPaymentLayoutVersion;
 
     // Auto-fill bank details when bank dropdown is selected
     const bankDetailsDatabase = {
@@ -1164,13 +1132,6 @@ lucide.createIcons();
           const container = document.querySelector('.app-two-col');
           if (container) container.classList.add('stepper-collapsed');
           updateRailProgress();
-        }
-      } catch (e) { }
-
-      try {
-        const savedPos = localStorage.getItem('aminef_intl_payment_position');
-        if (savedPos === 'bottom') {
-          setIntlPaymentLayoutVersion('bottom');
         }
       } catch (e) { }
 
