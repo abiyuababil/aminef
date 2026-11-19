@@ -2528,3 +2528,518 @@
       color: #0070ba;
       font-weight: 700;
     }
+    /* ============================================================
+       DASHBOARD OVERVIEW & FULBRIGHT JOURNEY TRACKER
+       ============================================================ */
+    .dashboard-container {
+      width: 100%;
+    }
+
+    .dashboard-hero-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+    }
+
+    .dashboard-hero-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #f1f5f9;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .dashboard-program-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #0369a1;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .dashboard-hero-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #072a5a;
+      letter-spacing: -0.2px;
+    }
+
+    .dashboard-hero-sub {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 3px;
+    }
+
+    /* Fulbright Journey Timeline (Standard Dashboard Stepper) */
+    .journey-timeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      position: relative;
+      margin: 28px 0 20px;
+      padding: 0 10px;
+    }
+
+    .journey-timeline::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 8%;
+      right: 8%;
+      height: 3px;
+      background: #e2e8f0;
+      z-index: 1;
+    }
+
+    .journey-timeline-progress {
+      position: absolute;
+      top: 18px;
+      left: 8%;
+      width: 25%;
+      height: 3px;
+      background: #0070ba;
+      z-index: 2;
+      transition: width 0.3s ease;
+    }
+
+    .journey-step-item {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: default;
+    }
+
+    .journey-step-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2.5px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 0 4px #ffffff;
+    }
+
+    .journey-step-item.completed .journey-step-dot {
+      background: #10b981;
+      border-color: #10b981;
+      color: #ffffff;
+    }
+
+    .journey-step-item.active .journey-step-dot {
+      background: #0070ba;
+      border-color: #0070ba;
+      color: #ffffff;
+      box-shadow: 0 0 0 4px rgba(0, 112, 186, 0.2);
+    }
+
+    .journey-step-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 2px;
+    }
+
+    .journey-step-item.active .journey-step-title {
+      color: #0070ba;
+    }
+
+    .journey-step-status {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .journey-step-item.completed .journey-step-status {
+      color: #10b981;
+    }
+
+    .journey-step-item.active .journey-step-status {
+      color: #0070ba;
+    }
+
+    /* Active Stage Callout Box */
+    .journey-stage-callout {
+      background: #f0f7fe;
+      border: 1px solid #bae0fd;
+      border-radius: 6px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .journey-callout-text h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #072a5a;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .journey-callout-text p {
+      font-size: 12.5px;
+      color: #334155;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .journey-callout-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Scholarship Application History Card (Image 3) */
+    .history-panel-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 24px 28px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      margin-bottom: 28px;
+    }
+
+    .history-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .history-panel-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #072a5a;
+    }
+
+    .history-panel-desc {
+      font-size: 12.5px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    /* Action: Payment button in table */
+    .btn-payment-action {
+      background: #0070ba;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .btn-payment-action:hover {
+      background: #005a96;
+      transform: translateY(-1px);
+    }
+
+    /* History Status Badges Matching Screenshot 3 */
+    .badge-history-revise {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .badge-history-nominee {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .badge-history-returning {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .badge-history-rejected {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .badge-history-progress {
+      background: #dbeafe;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .badge-history-submitted {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #e2e8f0;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .badge-history-selection {
+      background: #f3e8ff;
+      color: #6b21a8;
+      border: 1px solid #e9d5ff;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    /* ============================================================
+       MY PROFILE STYLES (MATCHING IMAGES 1, 2, 3)
+       ============================================================ */
+    .profile-container {
+      width: 100%;
+    }
+
+    .profile-top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .profile-warning-banner {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 4px;
+      padding: 10px 16px;
+      font-size: 12.5px;
+      color: #92400e;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 22px 26px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+
+    .profile-section-heading {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .profile-section-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #0284c7;
+      display: inline-block;
+    }
+
+    .profile-field-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .profile-field-label .req-star {
+      color: #ef4444;
+    }
+
+    .profile-input,
+    .profile-select {
+      width: 100%;
+      height: 38px;
+      padding: 7px 12px;
+      font-size: 13px;
+      color: #0f172a;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      box-sizing: border-box;
+    }
+
+    .profile-input:disabled,
+    .profile-input[readonly] {
+      background: #f1f5f9;
+      color: #64748b;
+      cursor: not-allowed;
+    }
+
+    .profile-input:focus,
+    .profile-select:focus {
+      outline: none;
+      border-color: #0070ba;
+      box-shadow: 0 0 0 3px rgba(0, 112, 186, 0.15);
+    }
+
+    /* Photo Upload Box (Image 1) */
+    .profile-photo-box {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 16px;
+      background: #fafbfc;
+      text-align: center;
+      max-width: 320px;
+    }
+
+    .profile-photo-preview {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 12px;
+      background: #dc2626;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 1px;
+      position: relative;
+      border: 1px solid #b91c1c;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-photo-btn-group {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .btn-profile-choose {
+      background: #0070ba;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-profile-preview {
+      background: #f59e0b;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .profile-photo-guidance {
+      font-size: 10.5px;
+      color: #64748b;
+      line-height: 1.4;
+      text-align: left;
+    }
+
+    .profile-guidance-text {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 14px;
+      line-height: 1.45;
+    }
+
+    .btn-add-outline-blue {
+      background: #ffffff;
+      border: 1px solid #0070ba;
+      color: #0070ba;
+      border-radius: 4px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-add-outline-blue:hover {
+      background: #f0f7fe;
+    }
+
+    .profile-save-footer {
+      display: flex;
+      justify-content: flex-end;
+      padding: 16px 0 32px;
+    }

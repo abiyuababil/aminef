@@ -403,6 +403,8 @@ lucide.createIcons();
       const viewTravel = document.getElementById('view-travel');
       const viewAllowance = document.getElementById('view-allowance');
       const viewVisa = document.getElementById('view-visa');
+      const viewDashboard = document.getElementById('view-dashboard');
+      const viewProfile = document.getElementById('view-profile');
       const viewEmpty = document.getElementById('view-empty-state');
 
       // Hide all views
@@ -410,13 +412,24 @@ lucide.createIcons();
       if (viewTravel) viewTravel.style.display = 'none';
       if (viewAllowance) viewAllowance.style.display = 'none';
       if (viewVisa) viewVisa.style.display = 'none';
+      if (viewDashboard) viewDashboard.style.display = 'none';
+      if (viewProfile) viewProfile.style.display = 'none';
       if (viewEmpty) viewEmpty.style.display = 'none';
 
       // Reset all active classes on sidebar menu items
       document.querySelectorAll('.sidebar-menu-list .menu-item').forEach(el => el.classList.remove('active-menu'));
       document.querySelectorAll('.sidebar-menu-list .submenu-list li').forEach(el => el.classList.remove('active-sub'));
 
-      if (viewName === 'application') {
+      if (viewName === 'dashboard') {
+        if (viewDashboard) viewDashboard.style.display = 'block';
+        const navDash = document.getElementById('nav-dashboard');
+        if (navDash) navDash.classList.add('active-menu');
+      } else if (viewName === 'profile') {
+        if (viewProfile) viewProfile.style.display = 'block';
+        const navProf = document.getElementById('nav-profile');
+        if (navProf) navProf.classList.add('active-menu');
+        if (typeof switchProfileTab === 'function') switchProfileTab('personal');
+      } else if (viewName === 'application') {
         if (viewApplication) viewApplication.style.display = 'block';
         const navApp = document.getElementById('nav-application');
         if (navApp) navApp.classList.add('active-menu');
@@ -447,6 +460,81 @@ lucide.createIcons();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       lucide.createIcons();
     }
+
+    // ============================================================
+    // PROFILE TABS & ACTIONS (MATCHING IMAGES 1, 2, 3)
+    // ============================================================
+    function switchProfileTab(tab) {
+      const btnPersonal = document.getElementById('btn-ptab-personal');
+      const btnContact = document.getElementById('btn-ptab-contact');
+      const btnScholarship = document.getElementById('btn-ptab-scholarship');
+      const panePersonal = document.getElementById('ptab-pane-personal');
+      const paneContact = document.getElementById('ptab-pane-contact');
+      const paneScholarship = document.getElementById('ptab-pane-scholarship');
+
+      if (btnPersonal) btnPersonal.classList.remove('active');
+      if (btnContact) btnContact.classList.remove('active');
+      if (btnScholarship) btnScholarship.classList.remove('active');
+
+      if (panePersonal) panePersonal.style.display = 'none';
+      if (paneContact) paneContact.style.display = 'none';
+      if (paneScholarship) paneScholarship.style.display = 'none';
+
+      if (tab === 'personal') {
+        if (btnPersonal) btnPersonal.classList.add('active');
+        if (panePersonal) panePersonal.style.display = 'block';
+      } else if (tab === 'contact') {
+        if (btnContact) btnContact.classList.add('active');
+        if (paneContact) paneContact.style.display = 'block';
+      } else if (tab === 'scholarship') {
+        if (btnScholarship) btnScholarship.classList.add('active');
+        if (paneScholarship) paneScholarship.style.display = 'block';
+      }
+      lucide.createIcons();
+    }
+    window.switchProfileTab = switchProfileTab;
+
+    function saveProfilePersonal() {
+      alert('Personal information successfully updated.');
+    }
+    window.saveProfilePersonal = saveProfilePersonal;
+
+    function saveProfileContact() {
+      alert('Contact and emergency information successfully updated.');
+    }
+    window.saveProfileContact = saveProfileContact;
+
+    // Filter Dashboard Scholarship History (Image 3)
+    function filterDashboardHistory() {
+      const periodVal = document.getElementById('dash-history-period')?.value || 'all';
+      const statusVal = document.getElementById('dash-history-status')?.value || 'all';
+      const searchVal = (document.getElementById('dash-history-search')?.value || '').toLowerCase().trim();
+      const rows = document.querySelectorAll('#tbody-dashboard-history tr');
+      let visibleCount = 0;
+
+      rows.forEach(row => {
+        const period = row.getAttribute('data-period') || '';
+        const status = row.getAttribute('data-status') || '';
+        const text = row.innerText.toLowerCase();
+
+        const matchPeriod = (periodVal === 'all' || period === periodVal);
+        const matchStatus = (statusVal === 'all' || status.toLowerCase() === statusVal.toLowerCase());
+        const matchSearch = (!searchVal || text.includes(searchVal));
+
+        if (matchPeriod && matchStatus && matchSearch) {
+          row.style.display = '';
+          visibleCount++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      const counter = document.getElementById('dash-history-counter');
+      if (counter) {
+        counter.innerText = `Showing 1 to ${visibleCount} of ${rows.length} entries`;
+      }
+    }
+    window.filterDashboardHistory = filterDashboardHistory;
 
     // ============================================================
     // ONGOING GRANTEES VISA FUNCTIONS

@@ -5078,6 +5078,981 @@
         </div>
       </div>
 
+    
+      <!-- ============================================================
+           VIEW: DASHBOARD OVERVIEW (FULBRIGHT JOURNEY TRACKER & HISTORY)
+           ============================================================ -->
+      <div id="view-dashboard" class="main-page-view" style="display: none;">
+        <div class="dashboard-container">
+
+          <!-- TOP PAGE HEADING -->
+          <div class="page-title-center" style="margin-bottom: 24px;">
+            <h1>Dashboard Overview</h1>
+            <div class="program-title">Fulbright Doctoral Degree (PhD) Scholarship (2028)</div>
+          </div>
+
+          <!-- SECTION 1: FULBRIGHT JOURNEY STATUS TRACKER -->
+          <div class="dashboard-hero-card">
+            <div class="dashboard-hero-header">
+              <div>
+                <span class="dashboard-program-badge"><i data-lucide="compass" style="width: 13px; height: 13px;"></i> Active Journey Status</span>
+                <div class="dashboard-hero-title">Fulbright Journey Progress</div>
+                <div class="dashboard-hero-sub">Monitor your current milestone, evaluation phase, and next procedural requirements.</div>
+              </div>
+              <div style="text-align: right;">
+                <span class="badge-history-progress" style="font-size: 13px; padding: 6px 14px; border-radius: 6px;">
+                  Current Stage: Selection (Interview & Review)
+                </span>
+              </div>
+            </div>
+
+            <!-- Horizontal Journey Stepper (Timeline on Dashboard Only) -->
+            <div class="journey-timeline">
+              <div class="journey-timeline-progress" style="width: 25%;"></div>
+
+              <!-- Step 1: Application -->
+              <div class="journey-step-item completed">
+                <div class="journey-step-dot">
+                  <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                </div>
+                <div class="journey-step-title">1. Application</div>
+                <div class="journey-step-status">Completed (15 Jan 2026)</div>
+              </div>
+
+              <!-- Step 2: Selection (Current Active) -->
+              <div class="journey-step-item active">
+                <div class="journey-step-dot">
+                  <i data-lucide="clipboard-check" style="width: 16px; height: 16px;"></i>
+                </div>
+                <div class="journey-step-title">2. Selection</div>
+                <div class="journey-step-status">In Progress (Review & Interview)</div>
+              </div>
+
+              <!-- Step 3: Nomination -->
+              <div class="journey-step-item">
+                <div class="journey-step-dot">3</div>
+                <div class="journey-step-title">3. Nomination</div>
+                <div class="journey-step-status">Upcoming Phase</div>
+              </div>
+
+              <!-- Step 4: Ongoing -->
+              <div class="journey-step-item">
+                <div class="journey-step-dot">4</div>
+                <div class="journey-step-title">4. Ongoing</div>
+                <div class="journey-step-status">Grant Administration</div>
+              </div>
+
+              <!-- Step 5: Returning -->
+              <div class="journey-step-item">
+                <div class="journey-step-dot">5</div>
+                <div class="journey-step-title">5. Returning</div>
+                <div class="journey-step-status">Alumni & Re-entry</div>
+              </div>
+            </div>
+
+            <!-- Active Stage Highlight Callout -->
+            <div class="journey-stage-callout">
+              <div class="journey-callout-text">
+                <h4><i data-lucide="info" style="width: 16px; height: 16px; color: #0070ba;"></i> Current Status: Selection Committee Review</h4>
+                <p>Your application dossier has been verified and forwarded to the academic selection committee. Interview invitations will be announced via this portal and registered email.</p>
+              </div>
+              <div class="journey-callout-actions">
+                <button type="button" class="btn-create-green" onclick="switchMainView(\'application\')" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; font-size: 13px;">
+                  <i data-lucide="file-text" style="width: 15px; height: 15px;"></i> View My Application
+                </button>
+                <button type="button" class="btn-add-outline-blue" onclick="switchMainView(\'profile\'); switchProfileTab(\'scholarship\');">
+                  <i data-lucide="history" style="width: 14px; height: 14px;"></i> View All Applications
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: SCHOLARSHIP APPLICATION HISTORY (IMAGE 3) -->
+          <div class="history-panel-card">
+            <div class="history-panel-header">
+              <div>
+                <div class="history-panel-title">Scholarship Application History</div>
+                <div class="history-panel-desc">Complete record of your registered grant applications, review outcomes, and financial action items.</div>
+              </div>
+              <div>
+                <button type="button" class="btn-download-cyan" onclick="alert(\'Downloading official application history transcript PDF...\')">
+                  <i data-lucide="download" style="width: 14px; height: 14px;"></i> Download History
+                </button>
+              </div>
+            </div>
+
+            <!-- Standard AMINEF Filter & Search Toolbar -->
+            <div class="table-toolbar" style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div class="toolbar-left" style="display: flex; align-items: center; gap: 10px;">
+                <label style="font-size: 12.5px; color: #64748b; font-weight: 600;">Show</label>
+                <select id="dash-history-limit" onchange="filterDashboardHistory()" style="height: 34px; padding: 4px 10px; font-size: 12.5px; border: 1px solid #cbd5e1; border-radius: 4px; background: #fff;">
+                  <option value="15" selected>15 entries</option>
+                  <option value="25">25 entries</option>
+                  <option value="50">50 entries</option>
+                </select>
+
+                <select id="dash-history-period" onchange="filterDashboardHistory()" style="height: 34px; padding: 4px 10px; font-size: 12.5px; border: 1px solid #cbd5e1; border-radius: 4px; background: #fff;">
+                  <option value="all">All Periods</option>
+                  <option value="2027">2027</option>
+                  <option value="2026">2026</option>
+                  <option value="2025">2025</option>
+                </select>
+
+                <select id="dash-history-status" onchange="filterDashboardHistory()" style="height: 34px; padding: 4px 10px; font-size: 12.5px; border: 1px solid #cbd5e1; border-radius: 4px; background: #fff;">
+                  <option value="all">All Statuses</option>
+                  <option value="Revise">Revise</option>
+                  <option value="Nominee">Nominee</option>
+                  <option value="Returning">Returning</option>
+                  <option value="Rejected">Rejected</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Submitted">Submitted</option>
+                  <option value="Selection EEC">Selection EEC</option>
+                </select>
+              </div>
+
+              <div class="toolbar-right">
+                <div class="search-input-wrap" style="position: relative; width: 260px;">
+                  <i data-lucide="search" style="position: absolute; left: 10px; top: 10px; width: 14px; height: 14px; color: #94a3b8;"></i>
+                  <input type="text" id="dash-history-search" oninput="filterDashboardHistory()" placeholder="Search grants..."
+                    style="width: 100%; height: 34px; padding: 6px 12px 6px 32px; font-size: 12.5px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                </div>
+              </div>
+            </div>
+
+            <!-- Standard AMINEF Data Table -->
+            <div class="table-responsive">
+              <table class="data-table" id="table-dashboard-history">
+                <thead>
+                  <tr>
+                    <th style="width: 100px;">Period</th>
+                    <th>Grants</th>
+                    <th style="width: 160px;">Status</th>
+                    <th style="width: 140px; text-align: center;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-dashboard-history">
+                  <!-- Matching Image 3 Entries -->
+                  <tr data-period="2025" data-status="Revise">
+                    <td style="font-weight: 700; color: #072a5a;">2025</td>
+                    <td style="font-weight: 600; color: #1e293b;">Fulbright Master\'s Degree Scholarship</td>
+                    <td><span class="badge-history-revise">Revise</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment & Invoice portal for Fulbright Master\'s Degree Scholarship (2025)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr data-period="2025" data-status="Nominee">
+                    <td style="font-weight: 700; color: #072a5a;">2025</td>
+                    <td style="font-weight: 600; color: #1e293b;">Hubert H. Humphrey Fellowship Program for Mid-Career Professionals</td>
+                    <td><span class="badge-history-nominee">Nominee</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment & Invoice portal for Humphrey Fellowship (2025)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr data-period="2026" data-status="Returning">
+                    <td style="font-weight: 700; color: #072a5a;">2026</td>
+                    <td style="font-weight: 600; color: #1e293b;">Fulbright Doctoral Degree (PhD) Scholarship</td>
+                    <td><span class="badge-history-returning">Returning</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment & Invoice portal for Fulbright PhD (2026)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr data-period="2025" data-status="Rejected">
+                    <td style="font-weight: 700; color: #072a5a;">2025</td>
+                    <td style="font-weight: 600; color: #1e293b;">Community College Initiative Program</td>
+                    <td><span class="badge-history-rejected">Rejected</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Viewing details for Community College Initiative Program (2025)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr data-period="2025" data-status="In Progress">
+                    <td style="font-weight: 700; color: #072a5a;">2025</td>
+                    <td style="font-weight: 600; color: #1e293b;">Freeport-funded Community College Initiative Program</td>
+                    <td><span class="badge-history-progress">In Progress</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment & Invoice portal for Freeport CCIP (2025)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr data-period="2026" data-status="Returning">
+                    <td style="font-weight: 700; color: #072a5a;">2026</td>
+                    <td style="font-weight: 600; color: #1e293b;">Fulbright Master\'s Degree Scholarship</td>
+                    <td><span class="badge-history-returning">Returning</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment & Invoice portal for Fulbright Master\'s (2026)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr data-period="2026" data-status="Returning">
+                    <td style="font-weight: 700; color: #072a5a;">2026</td>
+                    <td style="font-weight: 600; color: #1e293b;">Fulbright Foreign Language Teaching Assistant (FLTA) Program</td>
+                    <td><span class="badge-history-returning">Returning</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment & Invoice portal for FLTA Program (2026)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr data-period="2025" data-status="Submitted">
+                    <td style="font-weight: 700; color: #072a5a;">2025</td>
+                    <td style="font-weight: 600; color: #1e293b;">Fulbright Distinguished Awards in Teaching Program for International Teachers (DAI)</td>
+                    <td><span class="badge-history-submitted">Submitted</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment & Invoice portal for DAI Program (2025)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr data-period="2026" data-status="Nominee">
+                    <td style="font-weight: 700; color: #072a5a;">2026</td>
+                    <td style="font-weight: 600; color: #1e293b;">Hubert H. Humphrey Fellowship Program for Mid-Career Professionals</td>
+                    <td><span class="badge-history-nominee">Nominee</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment & Invoice portal for Humphrey Fellowship (2026)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr data-period="2026" data-status="Returning">
+                    <td style="font-weight: 700; color: #072a5a;">2026</td>
+                    <td style="font-weight: 600; color: #1e293b;">Fulbright Visiting Scholar Program</td>
+                    <td><span class="badge-history-returning">Returning</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment & Invoice portal for Visiting Scholar Program (2026)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr data-period="2027" data-status="Submitted">
+                    <td style="font-weight: 700; color: #072a5a;">2027</td>
+                    <td style="font-weight: 600; color: #1e293b;">Fulbright Master\'s Degree Scholarship</td>
+                    <td><span class="badge-history-submitted">Submitted</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment & Invoice portal for Master\'s (2027)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr data-period="2027" data-status="Submitted">
+                    <td style="font-weight: 700; color: #072a5a;">2027</td>
+                    <td style="font-weight: 600; color: #1e293b;">Fulbright Doctoral Degree (PhD) Scholarship</td>
+                    <td><span class="badge-history-submitted">Submitted</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment & Invoice portal for PhD (2027)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr data-period="2027" data-status="In Progress">
+                    <td style="font-weight: 700; color: #072a5a;">2027</td>
+                    <td style="font-weight: 600; color: #1e293b;">Fulbright Visiting Scholar Program</td>
+                    <td><span class="badge-history-progress">In Progress</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment & Invoice portal for Visiting Scholar (2027)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr data-period="2025" data-status="Selection EEC">
+                    <td style="font-weight: 700; color: #072a5a;">2025</td>
+                    <td style="font-weight: 600; color: #1e293b;">A new PHP 8 - Testing new Program</td>
+                    <td><span class="badge-history-selection">Selection EEC</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for PHP 8 Testing Program (2025)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr data-period="2026" data-status="Submitted">
+                    <td style="font-weight: 700; color: #072a5a;">2026</td>
+                    <td style="font-weight: 600; color: #1e293b;">Fulbright U.S.-ASEAN Visiting Scholar Program</td>
+                    <td><span class="badge-history-submitted">Submitted</span></td>
+                    <td style="text-align: center;">
+                      <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for US-ASEAN Visiting Scholar (2026)...\')">
+                        <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Standard AMINEF Bottom Pagination -->
+            <div class="table-pagination-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px; flex-wrap: wrap; gap: 10px;">
+              <div class="pagination-info" style="font-size: 12.5px; color: #64748b;" id="dash-history-counter">
+                Showing 1 to 15 of 15 entries
+              </div>
+              <div class="pagination-controls" style="display: flex; gap: 4px;">
+                <button type="button" class="btn-page-step disabled" style="padding: 4px 10px; border: 1px solid #cbd5e1; background: #f8fafc; border-radius: 4px; font-size: 12px; color: #94a3b8; cursor: not-allowed;">Previous</button>
+                <button type="button" class="btn-page-step active" style="padding: 4px 10px; border: 1px solid #0070ba; background: #0070ba; border-radius: 4px; font-size: 12px; color: #fff; font-weight: 700;">1</button>
+                <button type="button" class="btn-page-step disabled" style="padding: 4px 10px; border: 1px solid #cbd5e1; background: #f8fafc; border-radius: 4px; font-size: 12px; color: #94a3b8; cursor: not-allowed;">Next</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ============================================================
+           VIEW: MY PROFILE (MATCHING IMAGES 1, 2, 3)
+           ============================================================ -->
+      <div id="view-profile" class="main-page-view" style="display: none;">
+        <div class="profile-container">
+
+          <!-- TOP HEADER WITH DOWNLOAD DOCUMENTS ACTION -->
+          <div class="profile-top-header">
+            <div>
+              <h1 style="font-size: 26px; font-weight: 800; color: #072a5a; margin: 0; letter-spacing: -0.3px;">My Profile</h1>
+            </div>
+            <div>
+              <button type="button" class="btn-download-cyan" onclick="alert(\'Downloading complete applicant profile dossier PDF...\')">
+                <i data-lucide="download" style="width: 14px; height: 14px;"></i> Download My Documents
+              </button>
+            </div>
+          </div>
+
+          <!-- AMINEF Standard Category Tabs (Images 1, 2, 3) -->
+          <div class="category-tabs-bar" style="margin-bottom: 20px;">
+            <button type="button" class="category-tab-btn active" id="btn-ptab-personal" onclick="switchProfileTab(\'personal\')">
+              Personal Information
+            </button>
+            <button type="button" class="category-tab-btn" id="btn-ptab-contact" onclick="switchProfileTab(\'contact\')">
+              Contact Information
+            </button>
+            <button type="button" class="category-tab-btn" id="btn-ptab-scholarship" onclick="switchProfileTab(\'scholarship\')">
+              Scholarship
+            </button>
+          </div>
+
+          <!-- ============================================================
+               TAB 1: PERSONAL INFORMATION (IMAGE 1)
+               ============================================================ -->
+          <div id="ptab-pane-personal" style="display: block;">
+
+            <!-- Warning Alert Banner -->
+            <div class="profile-warning-banner">
+              <i data-lucide="alert-circle" style="width: 16px; height: 16px; flex-shrink: 0;"></i>
+              <span>You can only fill in the Name, Biographical Information, and Citizenship Information sections once. These fields cannot be changed afterwards.</span>
+            </div>
+
+            <!-- CARD 1: NAME -->
+            <div class="profile-card">
+              <div class="profile-section-heading">
+                <span class="profile-section-dot"></span> NAME
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 340px; gap: 32px; align-items: start;">
+                <!-- Left: Form inputs -->
+                <div>
+                  <div style="display: grid; grid-template-columns: 140px 1fr; gap: 16px; margin-bottom: 14px;">
+                    <div>
+                      <label class="profile-field-label">Prefix</label>
+                      <select class="profile-select" id="prof-prefix">
+                        <option value="Mr" selected>Mr</option>
+                        <option value="Mrs">Mrs</option>
+                        <option value="Ms">Ms</option>
+                        <option value="Dr">Dr</option>
+                        <option value="Prof">Prof</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label class="profile-field-label">First/Given Name <span class="req-star">*</span></label>
+                      <input type="text" class="profile-input" id="prof-first-name" value="Abiyu" required>
+                      <div style="margin-top: 6px;">
+                        <label style="font-size: 11.5px; color: #475569; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+                          <input type="checkbox" id="prof-no-firstname" onchange="document.getElementById(\'prof-first-name\').disabled = this.checked;">
+                          I do not have a first/given name
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px;">
+                    <div>
+                      <label class="profile-field-label">Middle Name</label>
+                      <input type="text" class="profile-input" id="prof-middle-name" value="Testing">
+                    </div>
+                    <div>
+                      <label class="profile-field-label">Last/Family Name <span class="req-star">*</span></label>
+                      <input type="text" class="profile-input" id="prof-last-name" value="Ababil" required>
+                    </div>
+                  </div>
+
+                  <div style="width: 220px;">
+                    <label class="profile-field-label">Suffix (Jr./Sr./I/II/III)</label>
+                    <input type="text" class="profile-input" id="prof-suffix" value="Mr">
+                  </div>
+                </div>
+
+                <!-- Right: Photo Upload Box (Exact from Image 1) -->
+                <div class="profile-photo-box">
+                  <div class="profile-field-label" style="justify-content: center; text-align: center; margin-bottom: 10px;">
+                    Photo (See some examples and follow the guide here) <span class="req-star">*</span>
+                  </div>
+                  <div class="profile-photo-preview">
+                    <span style="font-size: 11px; text-transform: uppercase; opacity: 0.85;">AMINEF</span>
+                    THE TEST
+                    <i data-lucide="download" style="width: 14px; height: 14px; position: absolute; top: 6px; right: 6px; opacity: 0.85; cursor: pointer;" title="Download photo"></i>
+                  </div>
+                  <div class="profile-photo-btn-group">
+                    <button type="button" class="btn-profile-choose" onclick="alert(\'Choose file for applicant photo...\')">Choose file</button>
+                    <button type="button" class="btn-profile-preview" onclick="alert(\'Previewing official applicant photo (2x2 inches)...\')">
+                      <i data-lucide="eye" style="width: 12px; height: 12px;"></i> Preview
+                    </button>
+                  </div>
+                  <div class="profile-photo-guidance">
+                    The applicant\'s photograph to be included in the Application Form should be taken within six months of submission to reflect your current appearance, in color, and sized 2x2 inches (51x51 mm) or 3.5x4.5 cm. It should be taken against a plain white or off-white background. Please see the attached requirement for details.<br>
+                    <span style="font-weight: 700; color: #475569; display: block; margin-top: 4px;">File Size Max 5MB | Supported File: JPG, JPEG, PNG, PDF</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 2: BIOGRAPHICAL INFORMATION -->
+            <div class="profile-card">
+              <div class="profile-section-heading">
+                <span class="profile-section-dot"></span> BIOGRAPHICAL INFORMATION
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px;">
+                <div>
+                  <label class="profile-field-label">Birthdate <span class="req-star">*</span></label>
+                  <input type="text" class="profile-input" id="prof-birthdate" value="31 Dec 2007" required>
+                </div>
+                <div>
+                  <label class="profile-field-label">Country of Birth <span class="req-star">*</span></label>
+                  <select class="profile-select" id="prof-country-birth">
+                    <option value="Ecuador" selected>Ecuador</option>
+                    <option value="Indonesia">Indonesia</option>
+                    <option value="United States">United States</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="profile-field-label">State of Birth <span class="req-star">*</span></label>
+                  <select class="profile-select" id="prof-state-birth">
+                    <option value="Canar" selected>Canar</option>
+                    <option value="DKI Jakarta">DKI Jakarta</option>
+                    <option value="Jawa Barat">Jawa Barat</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                <div>
+                  <label class="profile-field-label">City of Birth <span class="req-star">*</span></label>
+                  <input type="text" class="profile-input" id="prof-city-birth" value="Biblian" required>
+                </div>
+                <div>
+                  <label class="profile-field-label">Gender <span class="req-star">*</span></label>
+                  <select class="profile-select" id="prof-gender">
+                    <option value="Male" selected>Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="profile-field-label">
+                    Physical Impairment <i data-lucide="info" style="width: 13px; height: 13px; color: #0070ba;" title="Provide details if you require physical or mobility accommodations"></i>
+                  </label>
+                  <input type="text" class="profile-input" id="prof-impairment" value="Physical Impairment" placeholder="None">
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 3: CITIZENSHIP INFORMATION -->
+            <div class="profile-card">
+              <div class="profile-section-heading">
+                <span class="profile-section-dot"></span> CITIZENSHIP INFORMATION
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr 340px; gap: 20px; margin-bottom: 20px; align-items: start;">
+                <div>
+                  <label class="profile-field-label">Country of Citizenship <span class="req-star">*</span></label>
+                  <select class="profile-select" id="prof-citizenship">
+                    <option value="Indonesia" selected>Indonesia</option>
+                    <option value="United States">United States</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="profile-field-label">KTP <span class="req-star">*</span></label>
+                  <input type="text" class="profile-input" id="prof-ktp" value="3173062209920005" required>
+                </div>
+                <!-- KTP Upload Box -->
+                <div class="profile-photo-box" style="padding: 12px; margin-top: 0;">
+                  <div class="profile-field-label" style="justify-content: center;">KTP <span class="req-star">*</span></div>
+                  <div class="profile-photo-preview" style="height: 70px; font-size: 14px; margin-bottom: 8px;">
+                    THE TEST
+                    <i data-lucide="download" style="width: 12px; height: 12px; position: absolute; top: 4px; right: 4px;" title="Download KTP"></i>
+                  </div>
+                  <div class="profile-photo-btn-group" style="margin-bottom: 4px;">
+                    <button type="button" class="btn-profile-choose" onclick="alert(\'Choose file for KTP upload...\')">Choose file</button>
+                    <button type="button" class="btn-profile-preview" onclick="alert(\'Previewing KTP file...\')">
+                      <i data-lucide="eye" style="width: 12px; height: 12px;"></i> Preview
+                    </button>
+                  </div>
+                  <div style="font-size: 10px; color: #64748b;">File Size Max 5MB | Supported: JPG, JPEG, PNG, PDF</div>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 340px; gap: 20px; align-items: start;">
+                <div>
+                  <label class="profile-field-label">Passport Number</label>
+                  <input type="text" class="profile-input" id="prof-passport-no" value="Passport Number" placeholder="e.g. X1234567">
+                </div>
+                <!-- Passport Upload Box -->
+                <div class="profile-photo-box" style="padding: 12px;">
+                  <div class="profile-field-label" style="justify-content: center;">Passport</div>
+                  <div style="font-size: 10.5px; color: #64748b; margin-bottom: 8px;">Please submit the first four pages of your passport</div>
+                  <div class="profile-photo-preview" style="height: 70px; font-size: 14px; margin-bottom: 8px;">
+                    THE TEST
+                    <i data-lucide="download" style="width: 12px; height: 12px; position: absolute; top: 4px; right: 4px;" title="Download passport document"></i>
+                  </div>
+                  <div class="profile-photo-btn-group" style="margin-bottom: 4px;">
+                    <button type="button" class="btn-profile-choose" onclick="alert(\'Choose file for Passport upload...\')">Choose file</button>
+                    <button type="button" class="btn-profile-preview" onclick="alert(\'Previewing passport pages...\')">
+                      <i data-lucide="eye" style="width: 12px; height: 12px;"></i> Preview
+                    </button>
+                  </div>
+                  <div style="font-size: 10px; color: #64748b;">File Size Max 5MB | Supported: JPG, JPEG, PNG, PDF</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Save Footer -->
+            <div class="profile-save-footer">
+              <button type="button" class="btn-create-green" onclick="saveProfilePersonal()" style="padding: 9px 24px; font-size: 13px;">
+                Save
+              </button>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               TAB 2: CONTACT INFORMATION (IMAGE 2)
+               ============================================================ -->
+          <div id="ptab-pane-contact" style="display: none;">
+
+            <!-- CARD 1: ADDRESS ON ID -->
+            <div class="profile-card">
+              <div class="profile-section-heading">
+                <span class="profile-section-dot"></span> ADDRESS ON ID
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px;">
+                <div>
+                  <label class="profile-field-label">Country</label>
+                  <select class="profile-select" id="prof-addr-country">
+                    <option value="Indonesia" selected>Indonesia</option>
+                    <option value="United States">United States</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="profile-field-label">State/Province</label>
+                  <input type="text" class="profile-input" id="prof-addr-state" value="DKI JAKARTA">
+                </div>
+                <div>
+                  <label class="profile-field-label">City</label>
+                  <input type="text" class="profile-input" id="prof-addr-city" value="KOTA JAKARTA BARAT">
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 16px;">
+                <div>
+                  <label class="profile-field-label">Street</label>
+                  <input type="text" class="profile-input" id="prof-addr-street" value="Komplek Golf Lake Rukan Venice Blok A No. 3, RT.2/RW.11, Cengkareng">
+                </div>
+                <div>
+                  <label class="profile-field-label">Postal Code</label>
+                  <input type="text" class="profile-input" id="prof-addr-postal" value="11730">
+                </div>
+              </div>
+
+              <div>
+                <label style="font-size: 12.5px; color: #1e293b; font-weight: 600; display: inline-flex; align-items: flex-start; gap: 8px; cursor: pointer;">
+                  <input type="checkbox" id="prof-addr-same-residence" checked style="margin-top: 3px;">
+                  <div>
+                    This address is my current residence and will be used for domicile verification.<br>
+                    <span style="font-size: 11.5px; color: #64748b; font-weight: 400; display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+                      <i data-lucide="info" style="width: 12px; height: 12px; color: #0070ba;"></i> Current address information will be the same as this address.
+                    </span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- CARD 2: TELEPHONE NUMBERS -->
+            <div class="profile-card">
+              <div class="profile-section-heading">
+                <span class="profile-section-dot"></span> TELEPHONE NUMBERS
+              </div>
+              <div class="profile-guidance-text">Please be sure to include the local code along with your number</div>
+
+              <div style="display: grid; grid-template-columns: 1fr 140px; gap: 12px; align-items: flex-end; margin-bottom: 16px; max-width: 600px;">
+                <div>
+                  <label class="profile-field-label">Cell Phone Number</label>
+                  <input type="tel" class="profile-input" id="prof-cell-phone" value="+62 812-3456-7890" placeholder="+62 ...">
+                </div>
+                <div>
+                  <button type="button" class="btn-add-outline-blue" onclick="alert(\'Additional phone number row added.\')" style="height: 38px; width: 100%; justify-content: center;">
+                    + Add Number
+                  </button>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 760px;">
+                <div>
+                  <label class="profile-field-label">Home Phone Number</label>
+                  <input type="tel" class="profile-input" id="prof-home-phone" value="324">
+                </div>
+                <div>
+                  <label class="profile-field-label">Work Phone Number</label>
+                  <input type="tel" class="profile-input" id="prof-work-phone" value="Work Phone Number">
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 3: E-MAIL -->
+            <div class="profile-card">
+              <div class="profile-section-heading">
+                <span class="profile-section-dot"></span> E-MAIL
+              </div>
+              <div class="profile-guidance-text">
+                Please provide a primary and secondary e-mail address (e.g. professional, university, etc.). In case we have difficulties contacting you at the primary e-mail address. Please note that all system-generated messages will be sent to the primary e-mail address.
+              </div>
+
+              <div style="margin-bottom: 16px; max-width: 600px;">
+                <label class="profile-field-label">Primary</label>
+                <input type="email" class="profile-input" id="prof-primary-email" value="abiyu.alumagubi+testing@gmail.com" readonly>
+              </div>
+
+              <div style="margin-bottom: 16px;">
+                <div style="font-size: 11.5px; color: #dc2626; font-weight: 600; margin-bottom: 8px;">
+                  Do not fill in if you do not want to change the password
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 760px;">
+                  <div>
+                    <label class="profile-field-label">Password</label>
+                    <input type="password" class="profile-input" id="prof-password" placeholder="Password">
+                  </div>
+                  <div>
+                    <label class="profile-field-label">Confirm Password</label>
+                    <input type="password" class="profile-input" id="prof-confirm-password" placeholder="Confirm Password">
+                  </div>
+                </div>
+              </div>
+
+              <div style="max-width: 600px;">
+                <label class="profile-field-label">Secondary Email</label>
+                <input type="email" class="profile-input" id="prof-secondary-email" value="Secondary Email">
+              </div>
+            </div>
+
+            <!-- CARD 4: EMERGENCY CONTACT INFORMATION -->
+            <div class="profile-card">
+              <div class="profile-section-heading">
+                <span class="profile-section-dot"></span> EMERGENCY CONTACT INFORMATION
+              </div>
+              <div class="profile-guidance-text">
+                The individuals listed below may be contacted in the event of an emergency while undertaking activities related to this grant opportunity, including any possible travel required for interviews in Indonesia.
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px;">
+                <div>
+                  <label class="profile-field-label">First/Given Name</label>
+                  <input type="text" class="profile-input" id="prof-emg-first" placeholder="First/Given Name">
+                </div>
+                <div>
+                  <label class="profile-field-label">Middle Name</label>
+                  <input type="text" class="profile-input" id="prof-emg-middle" placeholder="Middle Name">
+                </div>
+                <div>
+                  <label class="profile-field-label">Last/Family Name</label>
+                  <input type="text" class="profile-input" id="prof-emg-last" placeholder="Last/Family Name">
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px;">
+                <div>
+                  <label class="profile-field-label">Country</label>
+                  <select class="profile-select" id="prof-emg-country">
+                    <option value="">-- Select Country --</option>
+                    <option value="Indonesia">Indonesia</option>
+                    <option value="United States">United States</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="profile-field-label">State/Province</label>
+                  <input type="text" class="profile-input" id="prof-emg-state" placeholder="-- Select State/Province --">
+                </div>
+                <div>
+                  <label class="profile-field-label">City</label>
+                  <input type="text" class="profile-input" id="prof-emg-city" placeholder="-- Select City --">
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                <div>
+                  <label class="profile-field-label">Street</label>
+                  <input type="text" class="profile-input" id="prof-emg-street" placeholder="Street">
+                </div>
+                <div>
+                  <label class="profile-field-label">Postal Code</label>
+                  <input type="text" class="profile-input" id="prof-emg-postal" placeholder="Postal Code">
+                </div>
+                <div>
+                  <label class="profile-field-label">Phone Number</label>
+                  <input type="tel" class="profile-input" id="prof-emg-phone" placeholder="Phone Number">
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; max-width: 760px;">
+                <div>
+                  <label class="profile-field-label">Email</label>
+                  <input type="email" class="profile-input" id="prof-emg-email" placeholder="Email">
+                </div>
+                <div>
+                  <label class="profile-field-label">Relationship to You</label>
+                  <input type="text" class="profile-input" id="prof-emg-relation" placeholder="Relationship to You">
+                </div>
+              </div>
+
+              <div>
+                <button type="button" class="btn-add-outline-blue" onclick="alert(\'New emergency contact form block added.\')">
+                  + Add More Emergency Contact Information
+                </button>
+              </div>
+            </div>
+
+            <!-- Save Footer -->
+            <div class="profile-save-footer">
+              <button type="button" class="btn-create-green" onclick="saveProfileContact()" style="padding: 9px 24px; font-size: 13px;">
+                Save
+              </button>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               TAB 3: SCHOLARSHIP HISTORY (IMAGE 3)
+               ============================================================ -->
+          <div id="ptab-pane-scholarship" style="display: none;">
+            <div class="history-panel-card">
+              <div class="history-panel-header">
+                <div>
+                  <div class="history-panel-title">My Registered Scholarship Programs</div>
+                  <div class="history-panel-desc">All applications submitted through your AMINEF applicant account.</div>
+                </div>
+                <div>
+                  <button type="button" class="btn-download-cyan" onclick="alert(\'Downloading scholarship applications summary...\')">
+                    <i data-lucide="download" style="width: 14px; height: 14px;"></i> Download Summary
+                  </button>
+                </div>
+              </div>
+
+              <!-- Standard AMINEF Data Table (Image 3) -->
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 100px;">Period</th>
+                      <th>Grants</th>
+                      <th style="width: 160px;">Status</th>
+                      <th style="width: 140px; text-align: center;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2025</td>
+                      <td style="font-weight: 600; color: #1e293b;">Fulbright Master\'s Degree Scholarship</td>
+                      <td><span class="badge-history-revise">Revise</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for Fulbright Master\'s (2025)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2025</td>
+                      <td style="font-weight: 600; color: #1e293b;">Hubert H. Humphrey Fellowship Program for Mid-Career Professionals</td>
+                      <td><span class="badge-history-nominee">Nominee</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for Humphrey Fellowship (2025)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2026</td>
+                      <td style="font-weight: 600; color: #1e293b;">Fulbright Doctoral Degree (PhD) Scholarship</td>
+                      <td><span class="badge-history-returning">Returning</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for Fulbright PhD (2026)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2025</td>
+                      <td style="font-weight: 600; color: #1e293b;">Community College Initiative Program</td>
+                      <td><span class="badge-history-rejected">Rejected</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Viewing details for CCIP (2025)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2025</td>
+                      <td style="font-weight: 600; color: #1e293b;">Freeport-funded Community College Initiative Program</td>
+                      <td><span class="badge-history-progress">In Progress</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for Freeport CCIP (2025)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2026</td>
+                      <td style="font-weight: 600; color: #1e293b;">Fulbright Master\'s Degree Scholarship</td>
+                      <td><span class="badge-history-returning">Returning</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for Master\'s (2026)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2026</td>
+                      <td style="font-weight: 600; color: #1e293b;">Fulbright Foreign Language Teaching Assistant (FLTA) Program</td>
+                      <td><span class="badge-history-returning">Returning</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for FLTA Program (2026)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2025</td>
+                      <td style="font-weight: 600; color: #1e293b;">Fulbright Distinguished Awards in Teaching Program for International Teachers (DAI)</td>
+                      <td><span class="badge-history-submitted">Submitted</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for DAI (2025)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2026</td>
+                      <td style="font-weight: 600; color: #1e293b;">Hubert H. Humphrey Fellowship Program for Mid-Career Professionals</td>
+                      <td><span class="badge-history-nominee">Nominee</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for Humphrey Fellowship (2026)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2026</td>
+                      <td style="font-weight: 600; color: #1e293b;">Fulbright Visiting Scholar Program</td>
+                      <td><span class="badge-history-returning">Returning</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for Visiting Scholar (2026)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2027</td>
+                      <td style="font-weight: 600; color: #1e293b;">Fulbright Master\'s Degree Scholarship</td>
+                      <td><span class="badge-history-submitted">Submitted</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for Master\'s (2027)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2027</td>
+                      <td style="font-weight: 600; color: #1e293b;">Fulbright Doctoral Degree (PhD) Scholarship</td>
+                      <td><span class="badge-history-submitted">Submitted</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for PhD (2027)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2027</td>
+                      <td style="font-weight: 600; color: #1e293b;">Fulbright Visiting Scholar Program</td>
+                      <td><span class="badge-history-progress">In Progress</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for Visiting Scholar (2027)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2025</td>
+                      <td style="font-weight: 600; color: #1e293b;">A new PHP 8 - Testing new Program</td>
+                      <td><span class="badge-history-selection">Selection EEC</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for PHP 8 Testing Program (2025)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight: 700; color: #072a5a;">2026</td>
+                      <td style="font-weight: 600; color: #1e293b;">Fulbright U.S.-ASEAN Visiting Scholar Program</td>
+                      <td><span class="badge-history-submitted">Submitted</span></td>
+                      <td style="text-align: center;">
+                        <button type="button" class="btn-payment-action" onclick="alert(\'Opening Payment portal for US-ASEAN Visiting Scholar (2026)...\')">
+                          <i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Payment
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Pagination -->
+              <div class="table-pagination-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+                <div class="pagination-info" style="font-size: 12.5px; color: #64748b;">
+                  Showing 1 to 15 of 15 entries
+                </div>
+                <div class="pagination-controls" style="display: flex; gap: 4px;">
+                  <button type="button" class="btn-page-step disabled" style="padding: 4px 10px; border: 1px solid #cbd5e1; background: #f8fafc; border-radius: 4px; font-size: 12px; color: #94a3b8; cursor: not-allowed;">Previous</button>
+                  <button type="button" class="btn-page-step active" style="padding: 4px 10px; border: 1px solid #0070ba; background: #0070ba; border-radius: 4px; font-size: 12px; color: #fff; font-weight: 700;">1</button>
+                  <button type="button" class="btn-page-step disabled" style="padding: 4px 10px; border: 1px solid #cbd5e1; background: #f8fafc; border-radius: 4px; font-size: 12px; color: #94a3b8; cursor: not-allowed;">Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </main>
   </div>
   <!-- ============================================================
