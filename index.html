@@ -266,15 +266,9 @@
 
           <!-- TOP HEADER BAR (FLEX ROW: TITLE LEFT, DOWNLOAD GUIDE RIGHT) -->
           <div class="app-header-bar">
-            <div class="app-title-group" style="display: flex; align-items: center; gap: 14px;">
-              <button type="button" class="btn-stepper-expand-pill" id="btnExpandStepper" onclick="toggleAppStepperSidebar()" style="display: none;" title="Show application sections menu">
-                <i data-lucide="panel-left-open" aria-hidden="true" style="width: 14px; height: 14px; color: #0070ba;"></i>
-                <span>Sections (<span id="expand-progress-badge">5/16</span>)</span>
-              </button>
-              <div>
-                <div class="app-view-title">Application</div>
-                <div class="app-view-subtitle">Fulbright Doctoral Degree (PhD) Scholarship (2028)</div>
-              </div>
+            <div class="app-title-group">
+              <div class="app-view-title">Application</div>
+              <div class="app-view-subtitle">Fulbright Doctoral Degree (PhD) Scholarship (2028)</div>
             </div>
             <div>
               <button type="button" class="btn-download-cyan" onclick="alert('Downloading Application Guide PDF...')">
@@ -287,13 +281,13 @@
           <div class="app-two-col">
 
             <!-- LEFT COLUMN: VERTICAL SECTION STEPPER -->
-            <div class="app-stepper-sidebar">
+            <div class="app-stepper-sidebar" id="appStepperSidebar" onclick="handleStepperRailClick(event)">
               <div class="app-stepper-progress">
                 <div class="app-progress-label-row">
                   <span>Application Progress</span>
                   <div style="display: flex; align-items: center; gap: 8px;">
                     <span style="color: #0070ba; font-weight: 700;" id="app-progress-counter-text">5 of 16 (31%)</span>
-                    <button type="button" class="btn-stepper-collapse-toggle" onclick="toggleAppStepperSidebar()" title="Collapse sections menu" aria-label="Collapse sections menu">
+                    <button type="button" class="btn-stepper-collapse-toggle" onclick="toggleAppStepperSidebar(event)" title="Collapse sections menu" aria-label="Collapse sections menu">
                       <i data-lucide="panel-left-close" aria-hidden="true" style="width: 14px; height: 14px;"></i>
                     </button>
                   </div>
@@ -369,6 +363,20 @@
                   <span class="app-stepper-badge badge-status-empty" id="app-step-badge-16">Not Started</span>
                 </li>
               </ul>
+
+              <!-- MINI-RAIL VIEW (VISIBLE ONLY WHEN COLLAPSED) -->
+              <div class="app-stepper-rail-content" title="Click to expand sections menu">
+                <button type="button" class="btn-stepper-rail-toggle" onclick="toggleAppStepperSidebar(event)" title="Expand sections menu" aria-label="Expand sections menu">
+                  <i data-lucide="panel-left-open" aria-hidden="true" style="width: 18px; height: 18px;"></i>
+                </button>
+                <div class="rail-progress-badge" title="Progress: 5 of 16 completed">
+                  <span class="rail-progress-text" id="railProgressCounter">5/16</span>
+                  <div class="rail-progress-bar-v">
+                    <div class="rail-progress-fill-v" id="railProgressFill" style="height: 31%;"></div>
+                  </div>
+                </div>
+                <span class="rail-expand-hint">Sections</span>
+              </div>
             </div>
 
             <!-- RIGHT COLUMN: SECTION FORM CONTENT -->

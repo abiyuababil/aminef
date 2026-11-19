@@ -865,6 +865,8 @@ lucide.createIcons();
       if (counterText) counterText.innerText = `${completedCount} of 16 (${pct}%)`;
       if (barFill) barFill.style.width = pct + '%';
 
+      if (typeof updateRailProgress === 'function') updateRailProgress();
+
       updateDeclarationSummary(completedCount, sectionStatuses);
       lucide.createIcons();
     }
@@ -963,22 +965,15 @@ lucide.createIcons();
       }
     }
 
-    // Application Stepper Sidebar Collapse / Expand Functionality
-    function toggleAppStepperSidebar() {
+    // Application Stepper Sidebar Collapse / Expand Functionality (Slim Mini-Rail)
+    function toggleAppStepperSidebar(event) {
+      if (event && event.stopPropagation) event.stopPropagation();
       const container = document.querySelector('.app-two-col');
-      const btnExpand = document.getElementById('btnExpandStepper');
       if (!container) return;
 
       const isCollapsed = container.classList.toggle('stepper-collapsed');
-      if (btnExpand) btnExpand.style.display = isCollapsed ? 'inline-flex' : 'none';
-
-      const counterText = document.getElementById('app-progress-counter-text');
-      const expandBadge = document.getElementById('expand-progress-badge');
-      if (counterText && expandBadge) {
-        const match = counterText.innerText.match(/(\d+\s*of\s*\d+)/i);
-        if (match) {
-          expandBadge.innerText = match[1].replace(/\s*of\s*/i, '/');
-        }
+      if (isCollapsed) {
+        updateRailProgress();
       }
 
       try {
@@ -988,6 +983,30 @@ lucide.createIcons();
       lucide.createIcons();
     }
     window.toggleAppStepperSidebar = toggleAppStepperSidebar;
+
+    function handleStepperRailClick(event) {
+      const container = document.querySelector('.app-two-col');
+      if (container && container.classList.contains('stepper-collapsed')) {
+        toggleAppStepperSidebar(event);
+      }
+    }
+    window.handleStepperRailClick = handleStepperRailClick;
+
+    function updateRailProgress() {
+      const counterText = document.getElementById('app-progress-counter-text');
+      const railText = document.getElementById('railProgressCounter');
+      const railFill = document.getElementById('railProgressFill');
+      if (counterText && railText) {
+        const match = counterText.innerText.match(/(\d+)\s*of\s*(\d+)(?:\s*\(([\d.]+)%\))?/i);
+        if (match) {
+          railText.innerText = `${match[1]}/${match[2]}`;
+          if (railFill && match[3]) {
+            railFill.style.height = `${match[3]}%`;
+          }
+        }
+      }
+    }
+    window.updateRailProgress = updateRailProgress;
 
     // Attach listeners on load
     document.addEventListener('DOMContentLoaded', function () {
@@ -1003,9 +1022,8 @@ lucide.createIcons();
         const savedStepperState = localStorage.getItem('aminef_app_stepper_collapsed');
         if (savedStepperState === 'true') {
           const container = document.querySelector('.app-two-col');
-          const btnExpand = document.getElementById('btnExpandStepper');
           if (container) container.classList.add('stepper-collapsed');
-          if (btnExpand) btnExpand.style.display = 'inline-flex';
+          updateRailProgress();
         }
       } catch (e) { }
 

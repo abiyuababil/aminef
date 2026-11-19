@@ -1641,17 +1641,115 @@
     .app-two-col {
       display: grid;
       grid-template-columns: 320px 1fr;
-      gap: 32px;
+      gap: 28px;
       align-items: start;
-      transition: grid-template-columns 0.2s ease;
+      transition: grid-template-columns 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .app-two-col.stepper-collapsed {
-      grid-template-columns: 1fr !important;
+      grid-template-columns: 52px 1fr !important;
+      gap: 24px;
     }
 
     .app-two-col.stepper-collapsed .app-stepper-sidebar {
+      width: 52px !important;
+      min-width: 52px !important;
+      max-width: 52px !important;
+      padding: 0;
+      border-color: #cbd5e1;
+      cursor: pointer;
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .app-two-col.stepper-collapsed .app-stepper-sidebar:hover {
+      border-color: #0070ba;
+      box-shadow: 0 4px 14px rgba(0, 112, 186, 0.12), 0 1px 3px rgba(0, 0, 0, 0.06);
+    }
+
+    .app-two-col.stepper-collapsed .app-stepper-progress,
+    .app-two-col.stepper-collapsed .app-stepper-list {
       display: none !important;
+    }
+
+    /* Stepper Rail (Visible only when collapsed) */
+    .app-stepper-rail-content {
+      display: none;
+    }
+
+    .app-two-col.stepper-collapsed .app-stepper-rail-content {
+      display: flex !important;
+      flex-direction: column;
+      align-items: center;
+      padding: 14px 6px 18px;
+      gap: 16px;
+      user-select: none;
+    }
+
+    .btn-stepper-rail-toggle {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: #f0f7ff;
+      border: 1px solid #bae0fd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0070ba;
+      cursor: pointer;
+      transition: background-color 0.15s, transform 0.15s, border-color 0.15s;
+    }
+
+    .btn-stepper-rail-toggle:hover {
+      background: #e0f2fe;
+      border-color: #7dd3fc;
+      transform: scale(1.05);
+    }
+
+    .rail-progress-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rail-progress-text {
+      font-size: 11px;
+      font-weight: 700;
+      color: #0070ba;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.2px;
+    }
+
+    .rail-progress-bar-v {
+      width: 6px;
+      height: 70px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rail-progress-fill-v {
+      width: 100%;
+      background: #0070ba;
+      border-radius: 999px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: height 0.3s ease;
+    }
+
+    .rail-expand-hint {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-top: 4px;
     }
 
     .btn-stepper-collapse-toggle {
@@ -1671,27 +1769,6 @@
     .btn-stepper-collapse-toggle:hover {
       background: #e2e8f0;
       color: #072a5a;
-    }
-
-    .btn-stepper-expand-pill {
-      background: #ffffff;
-      border: 1px solid #0070ba;
-      border-radius: 6px;
-      padding: 6px 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 12.5px;
-      font-weight: 600;
-      color: #072a5a;
-      cursor: pointer;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-      transition: background 0.15s, border-color 0.15s;
-    }
-
-    .btn-stepper-expand-pill:hover {
-      background: #f0f7fd;
-      border-color: #005a96;
     }
 
     @media (max-width: 1100px) {
