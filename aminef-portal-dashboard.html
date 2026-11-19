@@ -2297,62 +2297,99 @@
              ============================================================ -->
           <div class="category-pane" id="pane-international">
 
-            <!-- TABEL RINGKASAN DI ATAS (Sama persis polanya dengan tabel In Country) -->
-            <div class="panel-card" style="margin-bottom: 16px;">
-              <div class="section-dot-title">
-                International Allowance Payment
+            <!-- TATA LETAK TOGGLE BAR (MEMBANDINGKAN VERSI 1 VS VERSI 2) -->
+            <div class="allowance-layout-version-bar">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="layout" style="width: 15px; height: 15px; color: #0070ba;"></i>
+                <span style="font-size: 12.5px; font-weight: 700; color: #072a5a;">Tata Letak Tabel Pembayaran:</span>
+                <span style="font-size: 12px; color: #64748b;" id="desc-current-layout">Versi 1: Accordion (Bisa Buka - Tutup di Atas)</span>
               </div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <button type="button" class="btn-layout-opt active" id="btn-layout-v1" onclick="setIntlPaymentLayoutVersion('top')" title="Tampilkan tabel di atas dengan fitur accordion buka-tutup">
+                  <i data-lucide="chevrons-up-down" style="width: 13px; height: 13px;"></i> Versi 1: Accordion di Atas
+                </button>
+                <button type="button" class="btn-layout-opt" id="btn-layout-v2" onclick="setIntlPaymentLayoutVersion('bottom')" title="Pindahkan tabel ke bawah Pre-Departure & Return Allowance">
+                  <i data-lucide="arrow-down" style="width: 13px; height: 13px;"></i> Versi 2: Posisi di Bawah
+                </button>
+              </div>
+            </div>
 
-              <div class="table-responsive">
-                <table class="data-table">
-                  <thead>
-                    <tr>
-                      <th style="width: 50px; text-align: center;">#</th>
-                      <th>Description</th>
-                      <th style="width: 180px;">Category</th>
-                      <th style="width: 180px;">Amount (USD)</th>
-                      <th style="width: 130px; text-align: center;">Proof of Transfer</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="text-center">1</td>
-                      <td>Travel Allowance</td>
-                      <td>Pre-Departure</td>
-                      <td><strong>$150.00</strong></td>
-                      <td class="text-center">
-                        <button class="btn-view-blue" onclick="alert('Viewing Proof ($150.00)...')">View</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">2</td>
-                      <td>Settling in Allowance</td>
-                      <td>Pre-Departure</td>
-                      <td><strong>$1,390.00</strong></td>
-                      <td class="text-center">
-                        <button class="btn-view-blue" onclick="alert('Viewing Proof ($1,390.00)...')">View</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">3</td>
-                      <td>Equipment Allowance</td>
-                      <td>Pre-Departure</td>
-                      <td><strong>$1,200.00</strong></td>
-                      <td class="text-center">
-                        <button class="btn-view-blue" onclick="alert('Viewing Proof ($1,200.00)...')">View</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">4</td>
-                      <td>Return Baggage Allowance</td>
-                      <td>Return</td>
-                      <td><strong>$300.00</strong></td>
-                      <td class="text-center">
-                        <button class="btn-view-blue" onclick="alert('Viewing Proof ($300.00)...')">View</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+            <!-- SLOT TOP: Posisi Awal untuk Versi 1 (Accordion di Atas) -->
+            <div id="slot-intl-payment-top">
+              <!-- ACCORDION CARD: INTERNATIONAL ALLOWANCE PAYMENT -->
+              <div class="panel-card intl-payment-card" id="card-intl-payment" style="margin-bottom: 16px;">
+                <div class="intl-payment-accordion-header" id="header-intl-payment" onclick="toggleIntlPaymentAccordion()">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="profile-section-dot"></span>
+                    <span style="font-size: 13.5px; font-weight: 700; color: #072a5a;">International Allowance Payment</span>
+                    <span class="badge-history-returning" style="font-size: 11px; padding: 2px 8px;">
+                      4 Disbursed ($3,040.00 USD)
+                    </span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="intl-accordion-state-label" id="label-intl-accordion" style="font-size: 12px; font-weight: 600; color: #0070ba;">
+                      Collapse Table
+                    </span>
+                    <button type="button" class="btn-accordion-chevron" aria-label="Toggle Table">
+                      <i data-lucide="chevron-down" id="icon-intl-payment-chevron" class="chevron-rotated" style="width: 15px; height: 15px;"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- ACCORDION BODY -->
+                <div class="intl-payment-accordion-body" id="body-intl-payment" style="display: block; margin-top: 14px;">
+                  <div class="table-responsive" style="margin-bottom: 0;">
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th style="width: 50px; text-align: center;">#</th>
+                          <th>Description</th>
+                          <th style="width: 180px;">Category</th>
+                          <th style="width: 180px;">Amount (USD)</th>
+                          <th style="width: 130px; text-align: center;">Proof of Transfer</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="text-center">1</td>
+                          <td>Travel Allowance</td>
+                          <td>Pre-Departure</td>
+                          <td><strong>$150.00</strong></td>
+                          <td class="text-center">
+                            <button class="btn-view-blue" onclick="alert('Viewing Proof ($150.00)...')">View</button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-center">2</td>
+                          <td>Settling in Allowance</td>
+                          <td>Pre-Departure</td>
+                          <td><strong>$1,390.00</strong></td>
+                          <td class="text-center">
+                            <button class="btn-view-blue" onclick="alert('Viewing Proof ($1,390.00)...')">View</button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-center">3</td>
+                          <td>Equipment Allowance</td>
+                          <td>Pre-Departure</td>
+                          <td><strong>$1,200.00</strong></td>
+                          <td class="text-center">
+                            <button class="btn-view-blue" onclick="alert('Viewing Proof ($1,200.00)...')">View</button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-center">4</td>
+                          <td>Return Baggage Allowance</td>
+                          <td>Return</td>
+                          <td><strong>$300.00</strong></td>
+                          <td class="text-center">
+                            <button class="btn-view-blue" onclick="alert('Viewing Proof ($300.00)...')">View</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -2582,6 +2619,9 @@
             </div>
 
           </div>
+            <!-- SLOT BOTTOM: Posisi untuk Versi 2 (Di Bawah Pre-Departure & Return Allowance) -->
+            <div id="slot-intl-payment-bottom" style="margin-top: 16px;"></div>
+
 
         </div>
         <!-- END VIEW ALLOWANCE -->
