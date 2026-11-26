@@ -1,0 +1,16 @@
+
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h2 style="color:#0089d1">Departure</h2>
+        <h1 class="page-header"><?php echo $title ?></h1>
+        <!-- <h2><?= $grantee_grant->status_name ?></h2> -->
+    </div>
+</div>
+<div class="row">
+    <?php if ($success = $this->session->flashdata('success')) : ?>
+        <?= show_alert('success', $success); ?>
+    <?php endif; ?>
+</div>
+<?php $this->session->unset_userdata('success');?>
+
+<?php $this->load->view('admin/partials/tab_departure') ?>

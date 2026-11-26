@@ -1,0 +1,10 @@
+<div class="col-lg-12" style="font-size:12px">
+    <div class="col-lg-6">
+        <h5><b>Grantee</b></h5>
+        <p>Grantee Name <span class="pull-right"><a href="#" class="add_merge_field">{grantee_name}</a></span></p>
+        <p>Program Name <span class="pull-right"><a href="#" class="add_merge_field">{program_name}</a></span></p>
+        <p>Fiscal Year <span class="pull-right"><a href="#" class="add_merge_field">{fiscal_year}</a></span></p>
+        <p>Note <span class="pull-right"><a href="#" class="add_merge_field">{note}</a></span></p>
+        <p>Application Link <span class="pull-right"><a href="#" class="add_merge_field">{application_link}</a></span></p>
+    </div>
+</div>

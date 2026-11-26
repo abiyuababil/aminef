@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMINEF Full-Page UI Comparison (Original vs Revamped)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; color: #f8fafc; overflow: hidden; }
+    .topbar {
+      height: 56px;
+      background: #0f172a;
+      border-bottom: 2px solid #0070ba;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .title { font-size: 14px; font-weight: 700; white-space: nowrap; }
+    .controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .btn-grp {
+      display: inline-flex; background: #1e293b; border: 1px solid #334155;
+      border-radius: 6px; padding: 4px; gap: 4px;
+    }
+    .btn-grp button {
+      background: transparent; border: none; color: #cbd5e1;
+      padding: 8px 12px; font-size: 12px; font-weight: 600; border-radius: 4px; cursor: pointer;
+    }
+    .btn-grp button.active { background: #0070ba; color: #ffffff; }
+    select.page-select {
+      background: #1e293b; color: #f8fafc; border: 1px solid #334155;
+      border-radius: 6px; padding: 8px 12px; font-size: 12.5px; font-weight: 600;
+    }
+    .stage {
+      height: calc(100vh - 56px);
+      display: flex;
+      width: 100%;
+    }
+    .pane {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-right: 2px solid #334155;
+      min-width: 0;
+    }
+    .pane:last-child { border-right: none; }
+    .pane-label {
+      background: #1e293b;
+      color: #f8fafc;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 10px 16px;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      justify-content: space-between;
+    }
+    .pane-label--new { background: #081d38; color: #93c5fd; }
+    iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
+      background: #ffffff;
+    }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="title">AMINEF Full-Page Compare (Real Views)</div>
+    <div class="controls">
+      <div class="btn-grp">
+        <button type="button" class="active" id="viewSplit" onclick="setLayout('split')">Side-by-Side (50/50)</button>
+        <button type="button" id="viewLegacy" onclick="setLayout('legacy')">Full: Original</button>
+        <button type="button" id="viewRevamp" onclick="setLayout('revamp')">Full: Revamped</button>
+      </div>
+      <div class="btn-grp">
+        <button type="button" class="active" id="progIndo" onclick="setProg('indo')">Indonesian</button>
+        <button type="button" id="progUS" onclick="setProg('us')">American</button>
+      </div>
+      <select class="page-select" id="pageSelect" onchange="setPage(this.value)" aria-label="Select page to compare">
+        <option value="admin-dashboard">Admin: Dashboard (dashboard.php)</option>
+        <option value="admin-crud">Admin: City CRUD (city/list.php)</option>
+        <option value="grantee-payment">Grantee: Payment Schedule (payment/list.php)</option>
+        <option value="grantee-leaves">Grantee: Leaves List (leaves/list.php)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="pane" id="paneLegacy">
+      <div class="pane-label">ORIGINAL (LEGACY BOOTSTRAP 3 / SB ADMIN 2)</div>
+      <iframe id="frameLegacy" title="Original Portal View"></iframe>
+    </div>
+    <div class="pane" id="paneRevamp">
+      <div class="pane-label pane-label--new">REVAMPED (AMINEF STANDARD)</div>
+      <iframe id="frameRevamp" title="Revamped Portal View"></iframe>
+    </div>
+  </div>
+
+  <script>
+    var cfg = { layout: 'split', prog: 'indo', page: 'admin-dashboard' };
+
+    function setLayout(l) {
+      cfg.layout = l;
+      document.getElementById('viewSplit').classList.toggle('active', l === 'split');
+      document.getElementById('viewLegacy').classList.toggle('active', l === 'legacy');
+      document.getElementById('viewRevamp').classList.toggle('active', l === 'revamp');
+      document.getElementById('paneLegacy').classList.toggle('hidden', l === 'revamp');
+      document.getElementById('paneRevamp').classList.toggle('hidden', l === 'legacy');
+    }
+
+    function setProg(p) {
+      cfg.prog = p;
+      document.getElementById('progIndo').classList.toggle('active', p === 'indo');
+      document.getElementById('progUS').classList.toggle('active', p === 'us');
+      reloadFrames();
+    }
+
+    function setPage(pg) {
+      cfg.page = pg;
+      reloadFrames();
+    }
+
+    function reloadFrames() {
+      var q = '&prog=' + cfg.prog + '&page=' + cfg.page;
+      document.getElementById('frameLegacy').src = 'portal-preview.html?mode=legacy' + q;
+      document.getElementById('frameRevamp').src = 'portal-preview.html?mode=revamp' + q;
+    }
+
+    reloadFrames();
+  </script>
+</body>
+</html>

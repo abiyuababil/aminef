@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMINEF Real Views Live Compare (Original vs Revamped)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; color: #f8fafc; overflow: hidden; }
+    .topbar {
+      min-height: 58px;
+      background: #0f172a;
+      border-bottom: 2px solid #0070ba;
+      padding: 8px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .title { font-size: 13.5px; font-weight: 700; white-space: nowrap; }
+    .controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .btn-grp {
+      display: inline-flex; background: #1e293b; border: 1px solid #334155;
+      border-radius: 6px; padding: 8px; gap: 6px;
+    }
+    .btn-grp button {
+      background: transparent; border: none; color: #cbd5e1;
+      padding: 8px 12px; font-size: 12px; font-weight: 600; border-radius: 4px; cursor: pointer;
+    }
+    .btn-grp button.active { background: #0070ba; color: #ffffff; }
+    select.view-select {
+      background: #1e293b; color: #f8fafc; border: 1px solid #334155;
+      border-radius: 6px; padding: 8px 12px; font-size: 12.5px; font-weight: 600;
+      max-width: 320px;
+    }
+    .stage { height: calc(100vh - 60px); display: flex; width: 100%; }
+    .pane { flex: 1; display: flex; flex-direction: column; border-right: 2px solid #334155; min-width: 0; overflow: hidden; }
+    .pane:last-child { border-right: none; }
+    .pane-label {
+      background: #1e293b; color: #f8fafc; font-size: 12px; font-weight: 700;
+      padding: 10px 16px; border-bottom: 1px solid #334155;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .pane-label--new { background: #081d38; color: #93c5fd; }
+    .pane-viewport {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: #1e293b;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .pane-viewport.mobile-mode {
+      overflow-y: auto;
+      padding: 16px;
+    }
+    iframe {
+      border: none;
+      background: #ffffff;
+      transform-origin: top left;
+    }
+    .pane-viewport.mobile-mode iframe {
+      width: 375px !important;
+      height: 100% !important;
+      min-height: 667px;
+      transform: none !important;
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="title">AMINEF Real PHP Views Compare</div>
+    <div class="controls">
+      <div class="btn-grp">
+        <button type="button" class="active" id="viewSplit" onclick="setLayout('split')">Side-by-Side (50/50)</button>
+        <button type="button" id="viewLegacy" onclick="setLayout('legacy')">Full: Original</button>
+        <button type="button" id="viewRevamp" onclick="setLayout('revamp')">Full: Revamped</button>
+      </div>
+      <div class="btn-grp">
+        <button type="button" class="active" id="devDesktop" onclick="setDevice('desktop')">Desktop (1366px)</button>
+        <button type="button" id="devMobile" onclick="setDevice('mobile')">Mobile (375px)</button>
+      </div>
+      <div class="btn-grp">
+        <button type="button" class="active" id="progIndo" onclick="setProg('indo')">Indonesian</button>
+        <button type="button" id="progUS" onclick="setProg('us')">American</button>
+      </div>
+      <select class="view-select" id="viewSelect" onchange="setView(this.value)" aria-label="Select PHP view file">
+        <option value="admin/announcement/list.php">admin/announcement/list.php</option>
+        <option value="admin/dashboard/dashboard.php">admin/dashboard/dashboard.php</option>
+        <option value="admin/city/list.php">admin/city/list.php</option>
+        <option value="admin/allowance/list.php">admin/allowance/list.php</option>
+        <option value="grantee/payment/list.php">grantee/payment/list.php</option>
+        <option value="grantee/leaves/list.php">grantee/leaves/list.php</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="pane" id="paneLegacy">
+      <div class="pane-label">
+        <span>ORIGINAL (views/)</span>
+        <span class="device-badge" id="badgeLegacy">1366px Desktop</span>
+      </div>
+      <div class="pane-viewport" id="vpLegacy">
+        <iframe id="frameLegacy" title="Original PHP View"></iframe>
+      </div>
+    </div>
+    <div class="pane" id="paneRevamp">
+      <div class="pane-label pane-label--new">
+        <span>REVAMPED (revamp/views/)</span>
+        <span class="device-badge" id="badgeRevamp">1366px Desktop</span>
+      </div>
+      <div class="pane-viewport" id="vpRevamp">
+        <iframe id="frameRevamp" title="Revamped PHP View"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var cfg = { layout: 'split', device: 'desktop', prog: 'indo', view: 'admin/announcement/list.php' };
+
+    function applyViewportScale() {
+      var isMobile = cfg.device === 'mobile';
+      ['Legacy', 'Revamp'].forEach(function (side) {
+        var vp = document.getElementById('vp' + side);
+        var fr = document.getElementById('frame' + side);
+        var badge = document.getElementById('badge' + side);
+        vp.classList.toggle('mobile-mode', isMobile);
+
+        if (isMobile) {
+          badge.textContent = '375px Mobile';
+          fr.style.width = '375px';
+          fr.style.height = '100%';
+          fr.style.transform = 'none';
+          fr.style.position = 'static';
+        } else {
+          var vpW = vp.clientWidth || 640;
+          var vpH = vp.clientHeight || 700;
+          var targetW = 1366;
+          var scale = Math.min(1, vpW / targetW);
+          badge.textContent = '1366px Desktop (' + Math.round(scale * 100) + '%)';
+          fr.style.position = 'absolute';
+          fr.style.top = '0';
+          fr.style.left = '0';
+          fr.style.width = targetW + 'px';
+          fr.style.height = Math.ceil(vpH / scale) + 'px';
+          fr.style.transform = 'scale(' + scale + ')';
+        }
+      });
+    }
+
+    function setLayout(l) {
+      cfg.layout = l;
+      document.getElementById('viewSplit').classList.toggle('active', l === 'split');
+      document.getElementById('viewLegacy').classList.toggle('active', l === 'legacy');
+      document.getElementById('viewRevamp').classList.toggle('active', l === 'revamp');
+      document.getElementById('paneLegacy').classList.toggle('hidden', l === 'revamp');
+      document.getElementById('paneRevamp').classList.toggle('hidden', l === 'legacy');
+      setTimeout(applyViewportScale, 20);
+    }
+
+    function setDevice(d) {
+      cfg.device = d;
+      document.getElementById('devDesktop').classList.toggle('active', d === 'desktop');
+      document.getElementById('devMobile').classList.toggle('active', d === 'mobile');
+      applyViewportScale();
+    }
+
+    function setProg(p) {
+      cfg.prog = p;
+      document.getElementById('progIndo').classList.toggle('active', p === 'indo');
+      document.getElementById('progUS').classList.toggle('active', p === 'us');
+      reloadFrames();
+    }
+
+    function setView(v) {
+      cfg.view = v;
+      reloadFrames();
+    }
+
+    function reloadFrames() {
+      var q = 'view=' + encodeURIComponent(cfg.view) + '&prog=' + cfg.prog;
+      document.getElementById('frameLegacy').src = '/render?mode=legacy&' + q;
+      document.getElementById('frameRevamp').src = '/render?mode=revamp&' + q;
+    }
+
+    fetch('/api/views')
+      .then(function (r) { return r.json(); })
+      .then(function (list) {
+        var sel = document.getElementById('viewSelect');
+        sel.innerHTML = '';
+        list.forEach(function (v) {
+          var opt = document.createElement('option');
+          opt.value = v;
+          opt.textContent = v;
+          if (v === cfg.view) opt.selected = true;
+          sel.appendChild(opt);
+        });
+      })
+      .catch(function () {});
+
+    window.addEventListener('resize', applyViewportScale);
+    reloadFrames();
+    setTimeout(applyViewportScale, 50);
+  </script>
+</body>
+</html>

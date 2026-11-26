@@ -1,0 +1,613 @@
+/* ==========================================================================
+   AMINEF Portal Fresh Redesign System (Bootstrap 3 / SB Admin 2 Compatible)
+   Visual Direction: Deep Navy Sidebar (#081d38) + Crisp White Topbar +
+   Soft Slate Canvas (#f1f5f9) + Tinted Semantic Action Chips
+   ========================================================================== */
+
+:root {
+  --aminef-navy-deep: #081d38;
+  --aminef-navy: #0c2b52;
+  --aminef-blue: #0070ba;
+  --aminef-blue-bright: #0089d1;
+  --aminef-blue-soft: #e0f2fe;
+
+  /* Semantic Action Palette (WCAG AA >= 4.5:1) */
+  --action-create: #15803d;
+  --action-create-hover: #166534;
+  --action-view-bg: #e0f2fe;
+  --action-view-text: #0369a1;
+  --action-view-border: #bae6fd;
+  --action-edit-bg: #fef3c7;
+  --action-edit-text: #b45309;
+  --action-edit-border: #fde68a;
+  --action-delete-bg: #fee2e2;
+  --action-delete-text: #b91c1c;
+  --action-delete-border: #fecaca;
+
+  /* Surfaces & Borders */
+  --bg-page: #f1f5f9;
+  --bg-surface: #ffffff;
+  --bg-subtle: #f8fafc;
+  --border-color: #e2e8f0;
+  --border-input: #cbd5e1;
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #475569;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.05), 0 4px 14px rgba(15, 23, 42, 0.03);
+  --shadow-btn: 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   1. BASE & TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+body.aminef-revamp {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text-primary);
+  background-color: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+body.aminef-revamp #page-wrapper {
+  background-color: var(--bg-page) !important;
+  padding: 28px 32px;
+  min-height: calc(100vh - 60px);
+  border-left: none !important;
+}
+
+body.aminef-revamp h1.page-header {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin: 0 0 22px 0;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-color);
+  text-align: left !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+body.aminef-revamp .tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+body.aminef-revamp a:focus-visible,
+body.aminef-revamp button:focus-visible,
+body.aminef-revamp input:focus-visible,
+body.aminef-revamp select:focus-visible,
+body.aminef-revamp textarea:focus-visible {
+  outline: 2px solid var(--aminef-blue);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   2. FRESH SHELL: CRISP WHITE TOPBAR + DEEP NAVY SIDEBAR
+   -------------------------------------------------------------------------- */
+body.aminef-revamp .navbarheader {
+  background-color: var(--bg-surface) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  min-height: 60px !important;
+  margin-bottom: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+body.aminef-revamp .admin-navbar-main,
+body.aminef-revamp .grantee-navbar-main,
+body.aminef-revamp .user-navbar-main {
+  min-height: 60px !important;
+  padding: 0 24px !important;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+body.aminef-revamp .navbarheader .brand-lockup-text,
+body.aminef-revamp .navbarheader .brand-lockup,
+body.aminef-revamp .navbarheader .brand-text-lockup,
+body.aminef-revamp .navbarheader .header-right-cluster,
+body.aminef-revamp .navbarheader .header-right-cluster strong {
+  color: var(--text-primary) !important;
+}
+body.aminef-revamp .navbarheader .topbar-path-label,
+body.aminef-revamp .navbarheader .brand-sub,
+body.aminef-revamp .navbarheader .header-right-cluster small {
+  color: var(--text-muted) !important;
+  font-weight: 600;
+}
+
+/* Context Pill */
+.aminef-context-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.aminef-context-pill--indo {
+  background-color: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+.aminef-context-pill--us {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+.aminef-context-pill .ctx-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Deep Navy Sidebar */
+body.aminef-revamp .sidebar {
+  background: linear-gradient(180deg, #081d38 0%, #0b2547 100%) !important;
+  border-right: none !important;
+  width: 256px;
+  padding-top: 12px;
+}
+
+@media (min-width: 768px) {
+  body.aminef-revamp #page-wrapper {
+    margin-left: 256px;
+  }
+}
+
+body.aminef-revamp #side-menu > li {
+  padding: 2px 12px;
+}
+
+body.aminef-revamp #side-menu > li > a {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e8f0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+body.aminef-revamp #side-menu > li > a:hover,
+body.aminef-revamp #side-menu > li > a:focus {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+body.aminef-revamp #side-menu > li > a.active {
+  background-color: var(--aminef-blue);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 112, 186, 0.35);
+}
+
+/* --------------------------------------------------------------------------
+   3. MODERN ELEVATED CARDS & PANELS
+   -------------------------------------------------------------------------- */
+body.aminef-revamp .panel,
+body.aminef-revamp .card,
+body.aminef-revamp .panel-card,
+body.aminef-revamp #page-wrapper > .panel-body {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 22px;
+  overflow: hidden;
+}
+
+body.aminef-revamp #page-wrapper > .panel-body {
+  padding: 24px;
+}
+
+body.aminef-revamp .panel > .panel-heading,
+body.aminef-revamp .card > .card-header {
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 16px 24px;
+}
+
+body.aminef-revamp .panel-body,
+body.aminef-revamp .card-body {
+  padding: 24px;
+}
+
+body.aminef-revamp .panel-footer,
+body.aminef-revamp .card-footer {
+  background-color: var(--bg-subtle);
+  border-top: 1px solid var(--border-color);
+  padding: 12px 24px;
+}
+
+/* Clean Dashboard Stat Cards */
+body.aminef-revamp .panel-primary,
+body.aminef-revamp .panel-green,
+body.aminef-revamp .panel-red,
+body.aminef-revamp .panel-yellow {
+  border-color: var(--border-color);
+}
+body.aminef-revamp .panel-primary > .panel-heading,
+body.aminef-revamp .panel-green > .panel-heading,
+body.aminef-revamp .panel-red > .panel-heading,
+body.aminef-revamp .panel-yellow > .panel-heading {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+body.aminef-revamp .panel-primary .fa-5x,
+body.aminef-revamp .panel-green .fa-5x,
+body.aminef-revamp .panel-red .fa-5x,
+body.aminef-revamp .panel-yellow .fa-5x {
+  font-size: 28px;
+  color: var(--aminef-blue);
+  background: var(--aminef-blue-soft);
+  padding: 14px;
+  border-radius: 10px;
+}
+body.aminef-revamp .huge {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   4. FRESH ACTION BUTTONS (Solid Primary/Add + Tinted Row Action Chips)
+   -------------------------------------------------------------------------- */
+body.aminef-revamp .btn {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  border-radius: 8px;
+  font-size: 13px;
+  padding: 8px 16px;
+  line-height: 1.25;
+  box-shadow: var(--shadow-btn);
+  transition: all 0.15s ease;
+}
+
+body.aminef-revamp .btn-xs,
+body.aminef-revamp .btn-sm,
+body.aminef-revamp .btn-action-create,
+body.aminef-revamp .btn-action-view,
+body.aminef-revamp .btn-action-edit,
+body.aminef-revamp .btn-action-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+/* Add / Create / Save -> Solid Emerald Green */
+body.aminef-revamp .btn-success,
+body.aminef-revamp .btn-action-create,
+body.aminef-revamp .btn-save-green {
+  background-color: var(--action-create);
+  border-color: var(--action-create);
+  color: #ffffff;
+}
+body.aminef-revamp .btn-success:hover,
+body.aminef-revamp .btn-action-create:hover,
+body.aminef-revamp .btn-save-green:hover {
+  background-color: var(--action-create-hover);
+  border-color: var(--action-create-hover);
+  color: #ffffff;
+}
+
+/* View / Primary -> Solid Blue on toolbar, Soft Tinted Chip inside tables */
+body.aminef-revamp .btn-primary,
+body.aminef-revamp .btn-info,
+body.aminef-revamp .btn-action-view {
+  background-color: var(--aminef-blue);
+  border-color: var(--aminef-blue);
+  color: #ffffff;
+}
+body.aminef-revamp table .btn-primary,
+body.aminef-revamp table .btn-info,
+body.aminef-revamp table .btn-action-view {
+  background-color: var(--action-view-bg);
+  border-color: var(--action-view-border);
+  color: var(--action-view-text);
+  box-shadow: none;
+}
+body.aminef-revamp table .btn-primary:hover,
+body.aminef-revamp table .btn-info:hover,
+body.aminef-revamp table .btn-action-view:hover {
+  background-color: var(--aminef-blue);
+  border-color: var(--aminef-blue);
+  color: #ffffff;
+}
+
+/* Edit -> Soft Amber Chip */
+body.aminef-revamp .btn-warning,
+body.aminef-revamp .btn-action-edit {
+  background-color: var(--action-edit-bg);
+  border-color: var(--action-edit-border);
+  color: var(--action-edit-text);
+  box-shadow: none;
+}
+body.aminef-revamp .btn-warning:hover,
+body.aminef-revamp .btn-action-edit:hover {
+  background-color: #b45309;
+  border-color: #b45309;
+  color: #ffffff;
+}
+
+/* Delete -> Soft Red Chip */
+body.aminef-revamp .btn-danger,
+body.aminef-revamp .btn-action-delete {
+  background-color: var(--action-delete-bg);
+  border-color: var(--action-delete-border);
+  color: var(--action-delete-text);
+  box-shadow: none;
+}
+body.aminef-revamp .btn-danger:hover,
+body.aminef-revamp .btn-action-delete:hover {
+  background-color: #dc2626;
+  border-color: #dc2626;
+  color: #ffffff;
+}
+
+body.aminef-revamp .btn-default,
+body.aminef-revamp .btn-secondary {
+  background-color: #ffffff;
+  border-color: var(--border-input);
+  color: var(--text-secondary);
+}
+body.aminef-revamp .btn-default:hover,
+body.aminef-revamp .btn-secondary:hover {
+  background-color: var(--bg-subtle);
+  border-color: #94a3b8;
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   5. MODERN TABLES (.table & .data-table)
+   -------------------------------------------------------------------------- */
+body.aminef-revamp .table-responsive {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 18px;
+  overflow-x: auto;
+}
+
+body.aminef-revamp table.table,
+body.aminef-revamp table.data-table {
+  width: 100%;
+  margin-bottom: 0;
+  background-color: var(--bg-surface);
+  border-collapse: collapse;
+}
+
+body.aminef-revamp table.table > thead > tr > th,
+body.aminef-revamp table.data-table > thead > tr > th {
+  background-color: var(--bg-subtle) !important;
+  color: var(--text-muted) !important;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 13px 16px;
+  border-top: none;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+body.aminef-revamp table.table > tbody > tr > td,
+body.aminef-revamp table.data-table > tbody > tr > td {
+  padding: 14px 16px;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  border-top: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+body.aminef-revamp table.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #ffffff;
+}
+
+body.aminef-revamp table.table td[style*="#ebebeb"] {
+  background-color: var(--bg-subtle) !important;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+body.aminef-revamp table.table-hover > tbody > tr:hover > td,
+body.aminef-revamp table.data-table > tbody > tr:hover > td {
+  background-color: #f0f7fd;
+}
+
+/* Status Badges & Labels */
+body.aminef-revamp .status-badge,
+body.aminef-revamp .label {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+body.aminef-revamp .status-badge-success,
+body.aminef-revamp .label-success { background: #dcfce7; color: #15803d; }
+body.aminef-revamp .status-badge-warning,
+body.aminef-revamp .label-warning { background: #fef3c7; color: #b45309; }
+body.aminef-revamp .status-badge-danger,
+body.aminef-revamp .label-danger   { background: #fee2e2; color: #b91c1c; }
+body.aminef-revamp .status-badge-info,
+body.aminef-revamp .label-info,
+body.aminef-revamp .label-default  { background: #e0f2fe; color: #0369a1; }
+
+/* --------------------------------------------------------------------------
+   6. TOOLBAR, FORMS, TABS, ALERTS & PAGINATION
+   -------------------------------------------------------------------------- */
+body.aminef-revamp .data-header,
+body.aminef-revamp .filter-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: var(--shadow-card);
+}
+
+body.aminef-revamp .data-header .pull-left,
+body.aminef-revamp .data-header .pull-right {
+  float: none !important;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+body.aminef-revamp .data-header select.form-control,
+body.aminef-revamp .data-header input.form-control {
+  width: auto;
+  display: inline-block;
+}
+
+body.aminef-revamp .form-control {
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-input);
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  box-shadow: none;
+  min-height: 36px;
+  padding: 7px 12px;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+body.aminef-revamp .form-control:focus {
+  background-color: #ffffff;
+  border-color: var(--aminef-blue);
+  box-shadow: 0 0 0 3px rgba(0, 112, 186, 0.14);
+}
+
+body.aminef-revamp .nav-tabs {
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 20px;
+}
+body.aminef-revamp .nav-tabs > li > a {
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 13.5px;
+  padding: 10px 18px;
+}
+body.aminef-revamp .nav-tabs > li.active > a,
+body.aminef-revamp .nav-tabs > li.active > a:hover {
+  border: none;
+  border-bottom: 2px solid var(--aminef-blue);
+  color: var(--aminef-blue);
+  background: transparent;
+}
+
+body.aminef-revamp .alert {
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 13.5px;
+}
+body.aminef-revamp .alert-info { background: #f0f7fd; border-color: #bae6fd; color: #0c4a6e; }
+body.aminef-revamp .alert-success { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
+body.aminef-revamp .alert-danger { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+
+body.aminef-revamp .pagination > li > a {
+  border-radius: 6px;
+  margin: 0 2px;
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+body.aminef-revamp .pagination > .active > a,
+body.aminef-revamp .pagination > .active > span {
+  background-color: var(--aminef-blue);
+  border-color: var(--aminef-blue);
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   7. BOOTSTRAP MODAL & SWEETALERT2
+   -------------------------------------------------------------------------- */
+body.aminef-revamp .modal-content {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 20px 44px rgba(15, 23, 42, 0.2);
+  overflow: hidden;
+}
+body.aminef-revamp .modal-header {
+  background-color: var(--bg-subtle);
+  border-bottom: 1px solid var(--border-color);
+  padding: 16px 24px;
+}
+body.aminef-revamp .modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+body.aminef-revamp .modal-footer {
+  background-color: var(--bg-subtle);
+  border-top: 1px solid var(--border-color);
+  padding: 14px 24px;
+}
+
+.aminef-swal-popup {
+  font-family: var(--font-sans) !important;
+  border-radius: 12px !important;
+  padding: 26px !important;
+  border: 1px solid var(--border-color) !important;
+}
+.aminef-swal-confirm {
+  background-color: var(--aminef-blue) !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 9px 20px !important;
+}
+.aminef-swal-confirm--danger { background-color: #dc2626 !important; }
+.aminef-swal-confirm--success { background-color: #15803d !important; }
+.aminef-swal-cancel {
+  background-color: #ffffff !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-input) !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 9px 18px !important;
+}
